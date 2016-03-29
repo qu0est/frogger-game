@@ -24,10 +24,6 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-Enemy.prototype.reset = function(){
-    allEnemies.x = -200;
-};
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -36,25 +32,38 @@ Enemy.prototype.render = function() {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var Player = function(x, y, sprite) {
-    
+var Player = function(x, y, sprite) {    
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
 };
+
+Player.prototype.checkCollisions = function () {
+   allEnemies.forEach(function(enemy) {
+    // reference to enemy in here is the actual object in the array!
+    if (this.x < enemy.x + 50 
+        && this.x + 0 > enemy.x 
+        && this.y < enemy.y + 50 
+        && this.y + 0 > enemy.y) {
+        console.log(enemy.x);
+        }  
+    })
+};
+
+Player.prototype.restart = function() {
+    if (this.y < 200) {
+      setTimeout(this.gameReset, 200);
+  }
+};
     
-    Player.prototype.update = function(dt) {
-        if (this.y > 400 || this.y <= 0){
-            this.y = 400
-        } else if (this.x > 410 || this.x < 0){
-            this.x = 200
-        }
-        //if (this.checkCollisons()) {
-             //allEnemies.reset();
-             //this.reset();
-        // }
-    };
-   
+Player.prototype.update = function(dt) {
+    var crash = false;
+    this.checkCollisions();
+    if(crash || this.restart()) {
+        gameReset();
+    }
+};
+    
 
    Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -63,9 +72,9 @@ var Player = function(x, y, sprite) {
 
 Player.prototype.handleInput = function(manuever){
     if (manuever == "right"){
-        this.x = this.x + 100;
+        this.x = this.x + 80;
     }else if (manuever == "left"){
-        this.x = this.x - 100;
+        this.x = this.x - 80;
     }else if (manuever == "down"){
         this.y = this.y + 50;
     }else if (manuever == "up"){
@@ -73,22 +82,13 @@ Player.prototype.handleInput = function(manuever){
     }
 };
 
-Player.prototype.checkCollisions = function () {
-   allEnemies.forEach(function(enemy) {
-    // reference to enemy in here is the actual object in the array!
-    if (this.x < allEnemies.x + 100 && 
-            this.x + 100 > allEnemies.x && 
-            this.y < allEnemies.y + 50 && 
-            this.y + 50 > allEnemies.y) {
-            alert('Game Over');
-            console.log(enemy.x);
-            this.reset();
-            allEnemies.reset();
-            break;
-        }  
-    })
-};
-   
+
+
+Player.prototype.gameReset = function() {
+    this.x = 200;
+    this.y = 400;
+    crash = false;
+};  
     
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -100,7 +100,7 @@ var enemy3 = new Enemy(150, 125);
 var allEnemies = [enemy1, enemy2, enemy3,];
 
 // Place the player object in a variable called player
-var player = new Player(500,500);
+var player = new Player(200,400);
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
