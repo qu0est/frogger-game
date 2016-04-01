@@ -39,22 +39,35 @@ var Player = function(x, y, sprite) {
 };
 
 Player.prototype.checkCollisions = function () {
+   var playerX= this.x,
+       playerY = this.y;
+
    allEnemies.forEach(function(enemy) {
     // reference to enemy in here is the actual object in the array!
-    if (this.x < enemy.x + 50 
-        && this.x + 0 > enemy.x 
-        && this.y < enemy.y + 50 
-        && this.y + 0 > enemy.y) {
-        console.log(enemy.x);
-        }  
+
+    if (playerX < enemy.x + 50
+        && playerX + 0 > enemy.x
+        && playerY < enemy.y + 50
+        && playerY + 0 > enemy.y) {
+        console.log(player.x);
+        console.log(player.y);
+        }
     })
 };
 
+Player.prototype.gameReset = function() {
+    this.x = 440;
+    this.y = 600;
+    crash = false;
+};  
+
 Player.prototype.restart = function() {
-    if (this.y < 200) {
+    if (this.x >= 440 &&
+        this.y <= 0) {
       setTimeout(this.gameReset, 200);
   }
 };
+
     
 Player.prototype.update = function(dt) {
     var crash = false;
@@ -84,11 +97,7 @@ Player.prototype.handleInput = function(manuever){
 
 
 
-Player.prototype.gameReset = function() {
-    this.x = 200;
-    this.y = 400;
-    crash = false;
-};  
+
     
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
