@@ -4,14 +4,13 @@ var Enemy = function(x, y) {
     // we've provided one for you to get started
     this.x = x;
     this.y = y;
+    this.width = 20;
+    this.height = 60;
     this.move = Math.floor(Math.random() * 300);
-
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-
     };
-
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -23,12 +22,10 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
 };
-
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
@@ -36,53 +33,54 @@ var Player = function(x, y, sprite) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    this.width = 20;
+    this.height = 60;
 };
-
+//Checks when player and enemy collide and resets when they do
 Player.prototype.checkCollisions = function () {
-   var playerX= this.x,
-       playerY = this.y;
-
-   allEnemies.forEach(function(enemy) {
+    allEnemies.forEach(function(enemy) {
     // reference to enemy in here is the actual object in the array!
-
-    if (playerX < enemy.x + 50
-        && playerX + 0 > enemy.x
-        && playerY < enemy.y + 50
-        && playerY + 0 > enemy.y) {
-        console.log(player.x);
-        console.log(player.y);
+    if((player.x + player.width) >= (enemy.x) && 
+    (player.x) <= (enemy.x + enemy.width) && 
+    (player.y + player.height) >= (enemy.y) && 
+    (player.y) <= (enemy.y + enemy.height)){
+         player.resetGame();
+         alert('DO NOT BUG OUT, TRY AGAIN!!!')
+         console.log(player.x);
         }
     })
 };
-
-Player.prototype.gameReset = function() {
-    this.x = 440;
-    this.y = 600;
-    crash = false;
-};  
-
-Player.prototype.restart = function() {
-    if (this.x >= 440 &&
-        this.y <= 0) {
-      setTimeout(this.gameReset, 200);
-  }
-};
-
-    
+//Keeps player in confines of game
 Player.prototype.update = function(dt) {
-    var crash = false;
-    this.checkCollisions();
-    if(crash || this.restart()) {
-        gameReset();
+    this.x * (dt);
+    this.y * (dt);
+
+    if (this.x < 40 || this.x > 400) {
+        if(this.x < 40){
+            this.x = 0;
+        }else{
+            this.x = 400;
+        }
+    }
+    if (this.y < 0 || this.y > 400) {
+        if(this.y < 0){
+            this.resetGame();
+            alert('YOU MADE IT!!!');
+        }else{
+            this.y = 400;
+        }
     }
 };
-    
-
-   Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-
+//Player position resets when collision occurs and when he reaches water
+Player.prototype.resetGame = function () {
+  this.x = 200;
+  this.y = 400;
 };
 
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+//allows player to move within the confines of the game
 Player.prototype.handleInput = function(manuever){
     if (manuever == "right"){
         this.x = this.x + 80;
@@ -94,14 +92,9 @@ Player.prototype.handleInput = function(manuever){
         this.y = this.y - 50;
     }
 };
-
-
-
-
-    
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-
+//Creates enemy bugs
 var enemy1 = new Enemy(10, 60);
 var enemy2 = new Enemy(10, 200);
 var enemy3 = new Enemy(150, 125);
@@ -123,4 +116,4 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
     });
-
+    
