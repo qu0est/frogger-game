@@ -40,15 +40,15 @@ var Player = function(x, y, sprite) {
 Player.prototype.checkCollisions = function () {
     allEnemies.forEach(function(enemy) {
     // reference to enemy in here is the actual object in the array!
-    if((player.x + player.width) >= (enemy.x) && 
-    (player.x) <= (enemy.x + enemy.width) && 
-    (player.y + player.height) >= (enemy.y) && 
-    (player.y) <= (enemy.y + enemy.height)){
-         player.resetGame();
+    if((this.x + this.width) >= (enemy.x) && 
+    (this.x) <= (enemy.x + enemy.width) && 
+    (this.y + this.height) >= (enemy.y) && 
+    (this.y) <= (enemy.y + enemy.height)){
+         this.resetGame();
          alert('DO NOT BUG OUT, TRY AGAIN!!!')
          console.log(player.x);
         }
-    })
+    }.bind(this));
 };
 //Keeps player in confines of game
 Player.prototype.update = function(dt) {
