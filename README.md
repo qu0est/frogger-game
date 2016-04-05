@@ -5,7 +5,7 @@ You are about to embark on a bit of nostalgia. This is a small sample sized clon
 
 ##Steps to Get Started
 
-1)Clink on this [link](http://index.html) to initiate the game.
+1)Clink on this [link](http://arcade%20game/index.html) to initiate the game.
 
 2)The game objective is to move from the green pasture, past the brick road, without stepping on the **_enemy bugs_** and take a dip into the blue body of water. 
 
