@@ -5,7 +5,7 @@ You are about to embark on a bit of nostalgia. This is a small sample sized clon
 
 ##Steps to Get Started
 
-1) Visit my Github page http://qu0est.github.io/frogger-game-gh-pages to start the fun. 
+1) Visit my Github page hhttp://qu0est.github.io/frogger-game to start the fun. 
 
 
 2)The game objective is to move from the green pasture, past the brick road, without stepping on the **_enemy bugs_** and take a dip into the blue body of water. 
