@@ -5,10 +5,8 @@ You are about to embark on a bit of nostalgia. This is a small sample sized clon
 
 ##Steps to Get Started
 
-1)Clink on this [link](http://arcade%20game/index.html) to initiate the game.
+1)The game objective is to move from the green pasture, past the brick road, without stepping on the **_enemy bugs_** and take a dip into the blue body of water. 
 
-2)The game objective is to move from the green pasture, past the brick road, without stepping on the **_enemy bugs_** and take a dip into the blue body of water. 
+2)You are able to move around the game by using the **UP arrow** key, **DOWN arrow** key, **LEFT arrow** key, and **RIGHT arrow** key to move in any desirable direction. 
 
-3)You are able to move around the game by using the **UP arrow** key, **DOWN arrow** key, **LEFT arrow** key, and **RIGHT arrow** key to move in any desirable direction. 
-
-4)If you happen to step on the enemy bug or if you made it to the body of water, the game will reset the position of your player to it's original position. **Happy gaming!!!!!!**
+3)If you happen to step on the enemy bug or if you made it to the body of water, the game will reset the position of your player to it's original position. **Happy gaming!!!!!!**
